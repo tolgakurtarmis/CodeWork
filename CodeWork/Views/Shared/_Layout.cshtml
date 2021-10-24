@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/cd6263f11f.js" crossorigin="anonymous"></script>
+
+    <title>@ViewBag.Title - Kütüphane Sistemi</title>
+
+     
+    <link href="/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/css/oneui.css" rel="stylesheet" />
+    <link href="/Content/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/css/site.css" rel="stylesheet" />
+
+    <script src="/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="/Content/js/bootstrap.min.js"></script>
+    <script src="/Content/js/jquery.placeholder.min.js"></script>
+    <script src="/Content/js/jquery.scrollLock.min.js"></script>
+    <script src="/Content/js/jquery.slimscroll.min.js"></script>
+    <script src="/Content/js/jquery.appear.min.js"></script>
+    <script src="/Content/js/jquery.countTo.min.js"></script>
+    <script src="/Content/js/jquery.dataTables.min.js"></script>
+    <script src="/Content/js/dataTables.bootstrap.min.js"></script>
+    <script src="/Content/js/app.js"></script>
+    <script src="/Content/js/print.min.js"></script>
+    <script src="/Content/js/jquery.form.js"></script>
+    <script src="/Content/js/site.js"></script>
+
+
+
+
+
+
+</head>
+<body>
+    <div class="loader" style="display:none">
+        <div class="bookshelf_wrapper">
+            <ul class="books_list">
+                <li class="book_item first"></li>
+                <li class="book_item second"></li>
+                <li class="book_item third"></li>
+                <li class="book_item fourth"></li>
+                <li class="book_item fifth"></li>
+                <li class="book_item sixth"></li>
+            </ul>
+            <div class="shelf"></div>
+        </div>
+    </div>
+    <div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+        @Html.Partial("Menu")
+        @Html.Partial("Header")
+
+        <main id="main-container">
+            @RenderBody()
+        </main>
+    </div>
+
+</body>
+</html>

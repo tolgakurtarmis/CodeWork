@@ -1,0 +1,247 @@
+﻿@using CodeWork.Entities.Dtos
+@model BookTransactionCreateDto
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #bookTitle-autocomplete {
+        margin-top: 5px;
+        width: 100%;
+        border: 1px solid #d2d6de;
+        list-style: none;
+        background-color: #fefefe;
+        overflow-y: auto;
+    }
+
+        #bookTitle-autocomplete option {
+            padding: 5px;
+            margin: 3px;
+        }
+
+    #memberName-autocomplete {
+        margin-top: 5px;
+        width: 100%;
+        border: 1px solid #d2d6de;
+        list-style: none;
+        background-color: #fefefe;
+        overflow-y: auto;
+    }
+
+        #memberName-autocomplete option {
+            padding: 5px;
+            margin: 3px;
+        }
+</style>
+
+<div class="content bg-gray-lighter">
+    <div class="row items-push">
+        <div class="col-sm-7">
+            <h1 class="page-heading">
+            </h1>
+        </div>
+        <div class="col-sm-5 text-right hidden-xs">
+            <ol class="breadcrumb push-10-t">
+                <li>Member Add</li>
+                <li><a class="link-effect" href="/">Ana Sayfa</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="content">
+    @if (TempData.ContainsKey("BookTransactionSaveError"))
+    {
+        <div class="alert alert-danger fade in alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+            <strong>HATA! <br /></strong> @MvcHtmlString.Create(TempData["BookTransactionSaveError"].ToString())
+        </div>
+        TempData.Remove("BookTransactionSaveError");
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="block clearfix" style="padding: 20px">
+
+                @using (Html.BeginForm("Add", "BookTransaction", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+
+                    <div class="form-group">
+                        <div class="col-xs-9 col-md-9 col-lg-4">
+                            <label for="doc-name">Kitap Adı</label>
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Book.Title, new { @class = "form-control", @readonly = "readonly" })
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BookTitleFilterModal">SEÇ</button>
+                                </div>
+                            </div>
+                            @Html.HiddenFor(m => m.BookId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-9 col-md-9 col-lg-4">
+                            <label for="doc-name">Üye Adı</label>
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Member.Name, new { @class = "form-control", @readonly = "readonly" })
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MemberNameFilterModal">SEÇ</button>
+                                </div>
+                            </div>
+                            @Html.HiddenFor(m => m.MemberId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-9 col-md-9 col-lg-4">
+                            <label for="doc-name">Kitap Satış Adeti</label>
+                            @*<div class="input-group">*@
+                            @Html.TextBoxFor(m => m.SalesQuantity, new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-9 col-md-9 col-lg-4">
+                            <label for="doc-name">İade Tarihi</label>
+                            @*<div class="input-group">*@
+                            @Html.TextBoxFor(m => m.ReturnDate ,"{0:dd.MM.yyyy}", new { @class = "form-control", placeholder = "20.10.2017", data_date_format = "dd.mm.yyyy" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-md-12">
+                            <button id="btnSubmit" type="submit" class="btn btn-success">Kaydet</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="BookTitleFilterModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" style="text-align:center">KİTAPLAR</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" id="bookTitle-filter-text" placeholder="Aramak istediğiniz kitabın adını giriniz" />
+                <select id="bookTitle-autocomplete" size="10" width="100%"></select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" onclick="selectBookTitle()">SEÇ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="MemberNameFilterModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" style="text-align:center">KİTAPLAR</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" id="memberName-filter-text" placeholder="Aramak istediğiniz Üyenin adını giriniz" />
+                <select id="memberName-autocomplete" size="10" width="100%"></select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" onclick="selectMemberName()">SEÇ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $('#bookTitle-filter-text').on('paste keyup', function () {
+        var filter = $(this).val();
+        filter = filter.trim();
+        filterBookTitle(filter);
+    });
+
+    function selectBookTitle() {
+        var bookId = $('#bookTitle-autocomplete').val();
+        var bookTitle = $('#bookTitle-autocomplete option:selected').text();
+        if (bookId > 0 && bookTitle != null) {
+            $('#BookId').val(bookId);
+            $('#Book_Title').val(bookTitle.trim());
+
+            $('#MemberNameFilterModal').modal('toggle');
+        }
+    }
+
+    function filterBookTitle(filter) {
+        $.ajax({
+            url: '@Url.Action("FilterBook", "Book")',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                filter: filter
+            }),
+            success: function (results) {
+                if (results != null && results.Data.length > 0) {
+                    $('#bookTitle-autocomplete').html('');
+                    $.each(results.Data, function (i, v) {
+                        $('#bookTitle-autocomplete').append($('<option>', {
+                            value: v.Id,
+                            text: v.Name
+                        }));
+                    });
+                }
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+
+
+
+    $('#memberName-filter-text').on('paste keyup', function () {
+        var filter = $(this).val();
+        filter = filter.trim();
+        filterMember(filter);
+    });
+
+    function selectMemberName() {
+        var memberId = $('#memberName-autocomplete').val();
+        var memberName = $('#memberName-autocomplete option:selected').text();
+        if (memberId > 0 && memberName != null) {
+            $('#MemberId').val(memberId);
+            $('#Member_Name').val(memberName.trim());
+
+            $('#MemberNameFilterModal').modal('toggle');
+        }
+    }
+
+    function filterMember(filter) {
+        $.ajax({
+            url: '@Url.Action("FilterMember", "Member")',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                filter: filter
+            }),
+            success: function (results) {
+                if (results != null && results.Data.length > 0) {
+                    $('#memberName-autocomplete').html('');
+                    $.each(results.Data, function (i, v) {
+                        $('#memberName-autocomplete').append($('<option>', {
+                            value: v.Id,
+                            text: v.Name
+                        }));
+                    });
+                }
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+
+
+
+</script>

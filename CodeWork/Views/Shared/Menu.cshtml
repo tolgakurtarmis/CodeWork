@@ -1,0 +1,41 @@
+﻿<nav id="sidebar">
+    <div id="sidebar-scroll">
+        <div class="sidebar-content">
+            <div class="side-header side-content bg-white-op">
+                <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <a class="h5 text-white" href="/">
+                </a>
+            </div>
+            <div class="side-content">
+                <ul class="nav-main">
+                    <li class="open">
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-file-text-o"></i><span class="sidebar-mini-hide">Book</span></a>
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Add","Book")"><span class="sidebar-mini-hide">Add</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("List","Book")"><span class="sidebar-mini-hide">List</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="open">
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-file-text-o"></i><span class="sidebar-mini-hide">Member</span></a>
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Add","Member")"><span class="sidebar-mini-hide">Add</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("List","Member")"><span class="sidebar-mini-hide">List</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+@*}*@
+

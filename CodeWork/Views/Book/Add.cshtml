@@ -1,0 +1,188 @@
+﻿@using CodeWork.Entities.Dtos
+@model BookDto
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #author-autocomplete {
+        margin-top: 5px;
+        width: 100%;
+        border: 1px solid #d2d6de;
+        list-style: none;
+        background-color: #fefefe;
+        overflow-y: auto;
+    }
+
+        #author-autocomplete option {
+            padding: 5px;
+            margin: 3px;
+        }
+</style>
+
+<div class="content bg-gray-lighter">
+    <div class="row items-push">
+        <div class="col-sm-7">
+            <h1 class="page-heading">
+            </h1>
+        </div>
+        <div class="col-sm-5 text-right hidden-xs">
+            <ol class="breadcrumb push-10-t">
+                <li>Book Add</li>
+                <li><a class="link-effect" href="/">Ana Sayfa</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="block clearfix" style="padding: 20px">
+
+
+                @using (Html.BeginForm("Add", "Book", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+                {
+
+                    <div class="form-group">
+                        <div class="col-xs-9 col-md-9 col-lg-4">
+                            <label for="doc-name">Adı</label>
+                            @*<div class="input-group">*@
+                            @Html.TextBoxFor(b => b.Title, new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-9 col-md-9 col-lg-4">
+                            <label for="doc-name">Barkod</label>
+                            @*<div class="input-group">*@
+                            @Html.TextBoxFor(b => b.Barcode, new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-9 col-md-9 col-lg-4">
+                            <label for="doc-name">Yazar Adı</label>
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.AuthorName, new { @class = "form-control", @readonly = "readonly" })
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AuthorFilterModal">SEÇ</button>
+                                </div>
+                            </div>
+                            @Html.HiddenFor(m => m.BookAuthorId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-9 col-md-9 col-lg-4">
+                            <label for="doc-name">Sayfa Sayısı</label>
+                            @*<div class="input-group">*@
+                            @Html.TextBoxFor(b => b.PageNumber, new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-9 col-md-9 col-lg-4">
+                            <label for="doc-name">Stok Sayısı</label>
+                            @*<div class="input-group">*@
+                            @Html.TextBoxFor(b => b.StockQuantity, new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12 col-md-6 col-lg-4">
+                            <label for="doc-desc">Açıklama</label>
+                            @Html.TextAreaFor(b => b.Description, new { @class = "form-control", required = "required", placeholder = "Kitap Açıklaması..", style = "resize:none;" })
+                        </div>
+                    </div>
+                    <div class="form-group" style="display:none">
+                        <div class="col-xs-9 col-md-9  col-lg-4">
+                            <label>Image : </label>&nbsp;<span id="file-name"></span><br />
+                            <button type="button" class="btn btn-sm btn-success" onclick="javascript: document.getElementById('upload-file').click()">
+                                <i class="fa fa-upload"></i>&nbsp; Yükle
+                            </button>
+                            <input type="file" id="upload-file" name="UploadFiles" style="display:none" accept="" multiple />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button id="btnSubmit" type="submit" class="btn btn-success">Kaydet</button>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="AuthorFilterModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" style="text-align:center">YAZARLAR</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" id="author-filter-text" placeholder="Aramak istediğiniz yazarın adını giriniz" />
+                <select id="author-autocomplete" size="10" width="100%"></select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" onclick="selectAuthor()">SEÇ</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+
+    $('#author-filter-text').on('paste keyup', function () {
+        var filter = $(this).val();
+        filter = filter.trim();
+        filterAuthor(filter);
+    });
+
+    function selectAuthor() {
+        var authorId = $('#author-autocomplete').val();
+        var authorName = $('#author-autocomplete option:selected').text();
+        if (authorId > 0 && authorName != null) {
+            $('#BookAuthorId').val(authorId);
+            $('#AuthorName').val(authorName.trim());
+
+            $('#AuthorFilterModal').modal('toggle');
+        }
+    }
+
+    function filterAuthor(filter) {
+        $.ajax({
+            url: '@Url.Action("FilterAuthor", "Book")',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                filter: filter
+            }),
+            success: function (results) {
+                if (results != null && results.Data.length > 0) {
+                    $('#author-autocomplete').html('');
+                    $.each(results.Data, function (i, v) {
+                        $('#author-autocomplete').append($('<option>', {
+                            value: v.Id,
+                            text: v.Name
+                        }));
+                    });
+                }
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+
+     $('#upload-file').change(function () {
+         var files = $(this)[0];
+         if (files.files.length == 0) {
+             $('#file-name').html('');
+         } else if (files.files.length == 1) {
+             $('#file-name').html(files.files[0].name + ' yüklenecek');
+         } else {
+             $('#file-name').html(files.files.length + ' adet dosya yüklenecek');
+         }
+     });
+</script>

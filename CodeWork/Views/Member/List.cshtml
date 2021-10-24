@@ -1,0 +1,91 @@
+﻿@using CodeWork.Entities.Dtos
+@model List<MemberDto>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content bg-gray-lighter">
+    <div class="row items-push">
+        <div class="col-sm-7">
+            <h1 class="page-heading">
+            </h1>
+        </div>
+        <div class="col-sm-5 text-right hidden-xs">
+            <ol class="breadcrumb push-10-t">
+                <li>Üyeler</li>
+                <li><a class="link-effect" href="">Ana Sayfa</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    @if (TempData.ContainsKey("MemberAddSuccess"))
+    {
+        <div class="alert alert-success fade in alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+            <strong>@MvcHtmlString.Create(TempData["MemberAddSuccess"].ToString())</strong>
+        </div>
+        TempData.Remove("MemberAddSuccess");
+    }
+</div>
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="block">
+                <div class="block block-themed block-rounded">
+                    <div class="block-header bg-info">
+                        <ul class="block-options">
+                            <li>
+                                <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="fa fa-arrows-alt"></i></button>
+                            </li>
+                        </ul>
+
+                        <h3 class="block-title">Üyeler</h3>
+                    </div>
+                    <div class="block-content clearfix">
+                        <div class=" table-responsive">
+                            <table class="table table-bordered table-striped js-dataTable-full dataTable no-footer" id="list-table">
+                                <thead>
+                                    <tr>
+                                        <th>Üye No</th>
+                                        <th>Adı Soyadı</th>
+                                        <th>Tc No</th>
+                                        <th>Email</th>
+                                        <th>Telefon No</th>
+                                        <th>Aktif</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                    @foreach (var member in Model)
+                                    {
+                                    <tr>
+                                        <td>@member.Id</td>
+                                        <td>@member.NameSurname</td>
+                                        <td>@member.TCNo</td>
+                                        <td>@member.Email</td>
+                                        <td>@member.PhoneNumber</td>
+                                        <td>@(member.IsActive ? "True" : "False")</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="@Url.Action("Update","Member",new { memberId = member.Id })">Güncelle</a>
+
+                                        </td>
+                                    </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@using CodeWork.Entities.Dtos
+@model List<BookDto>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content bg-gray-lighter">
+    <div class="row items-push">
+        <div class="col-sm-7">
+            <h1 class="page-heading">
+            </h1>
+        </div>
+        <div class="col-sm-5 text-right hidden-xs">
+            <ol class="breadcrumb push-10-t">
+                <li>Kitaplar</li>
+                <li><a class="link-effect" href="">Ana Sayfa</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="block">
+                <div class="block block-themed block-rounded">
+                    <div class="block-header bg-info">
+                        <ul class="block-options">
+                            <li>
+                                <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="fa fa-arrows-alt"></i></button>
+                            </li>
+                        </ul>
+
+                        <h3 class="block-title">Kitaplar</h3>
+                    </div>
+                    <div class="block-content clearfix">
+                        <div class=" table-responsive">
+                            <table class="table table-bordered table-striped js-dataTable-full dataTable no-footer" id="list-table">
+                                <thead>
+                                    <tr>
+                                        <th>Kitap Adı</th>
+                                        <th>Eklenme Tarihi</th>
+                                        <th>Barkod</th>
+                                        <th>Stok Adeti</th>
+                                        <th>Açıklama</th>
+                                        <th>Yazar</th>
+                                        <th>Aktif mi</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                    @foreach (var book in Model)
+                                    {
+                                        <tr>
+                                            <td>@book.Title</td>
+                                            <td>@book.AddedDateTimeFormatted</td>
+                                            <td>@book.Barcode</td>
+                                            <td>@book.StockQuantity</td>
+                                            <td>@book.Description</td>
+                                            <td>@book.BookAuthor.Name</td>
+                                            <td>@(book.IsActive ? "True" : "False")</td>
+                                            <td>
+                                                <a class="btn btn-primary" href="@Url.Action("Update","Book",new { bookId = book.Id })">Güncelle</a>
+
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

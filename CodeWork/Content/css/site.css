@@ -1,0 +1,607 @@
+﻿/* ÖZEL FONT */
+@font-face {
+    font-family: 'Calibri';
+/*    src: url('/Core/fonts/Calibri-Light.eot?v=4.7.0');
+    src: url('/Core/fonts/Calibri-Light.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('/Core/fonts/Calibri-Light.woff2?v=4.7.0') format('woff2'), url('/Core/fonts/Calibri-Light.woff?v=4.7.0') format('woff'), url('/Core/fonts/Calibri-Light.ttf?v=4.7.0') format('truetype'), url('/Core/fonts/Calibri-Light.svg?v=4.7.0#fontawesomeregular') format('svg');
+*/    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Calibri';
+/*    src: url('/Core/fonts/Calibri.eot?v=4.7.0');
+    src: url('/Core/fonts/Calibri.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('/Core/fonts/Calibri.woff2?v=4.7.0') format('woff2'), url('/Core/fonts/Calibri.woff?v=4.7.0') format('woff'), url('/Core/fonts/Calibri.ttf?v=4.7.0') format('truetype'), url('/Core/fonts/Calibri.svg?v=4.7.0#fontawesomeregular') format('svg');
+*/    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Calibri';
+/*    src: url('/Core/fonts/Calibri-Bold.eot?v=4.7.0');
+    src: url('/Core/fonts/Calibri-Bold.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('/Core/fonts/Calibri-Bold.woff2?v=4.7.0') format('woff2'), url('/Core/fonts/Calibri-Bold.woff?v=4.7.0') format('woff'), url('/Core/fonts/Calibri-Bold.ttf?v=4.7.0') format('truetype'), url('/Core/fonts/Calibri-Bold.svg?v=4.7.0#fontawesomeregular') format('svg');
+*/    font-weight: 700;
+    font-style: normal;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* TreeView CSS Başlangıç */
+
+.css-treeview ul,
+.css-treeview li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.css-treeview input {
+    position: absolute;
+    opacity: 0;
+}
+
+.css-treeview {
+    font: normal 11px "Calibri";
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    margin-left: 10px;
+}
+
+    .css-treeview a {
+        color: #00f;
+        text-decoration: none;
+    }
+
+        .css-treeview a:hover {
+            text-decoration: underline;
+        }
+
+    .css-treeview input + label + ul {
+        margin: 0 0 0 22px;
+    }
+
+    .css-treeview input ~ ul {
+        display: none;
+    }
+
+    .css-treeview label,
+    .css-treeview label::before {
+        cursor: pointer;
+    }
+
+    .css-treeview input:disabled + label {
+        cursor: default;
+        opacity: .6;
+    }
+
+    .css-treeview input:checked:not(:disabled) ~ ul {
+        display: block;
+    }
+
+    .css-treeview label {
+        position: relative;
+        left: 20px;
+        font-size: 15px;
+    }
+
+
+        .css-treeview label::before {
+            content: "\f07b" !important;
+            position: absolute; /* this is your text. You can also use UTF-8 character codes as I do here */
+            font-family: FontAwesome;
+            left: -25px;
+            top: 0;
+            font-size: large;
+            color: #FFC107
+        }
+
+    .css-treeview input[type=checkbox]:checked + label:before {
+        content: "\f07c" !important;
+    }
+
+    .css-treeview input[state=selected] + label:before {
+        color: #FFC107
+    }
+
+    .css-treeview label,
+    .css-treeview a,
+    .css-treeview label::before {
+        display: inline-block;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: middle;
+    }
+
+    .css-treeview label {
+        background-position: 18px 0;
+    }
+
+        .css-treeview label::before {
+            content: "";
+            width: 16px;
+            margin: 0 22px 0 0;
+            vertical-align: middle;
+            background-position: 0 -32px;
+        }
+
+    .css-treeview input:checked + label::before {
+        background-position: 0 -16px;
+    }
+
+/* webkit adjacent element selector bugfix */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .css-treeview {
+        -webkit-animation: webkit-adjacent-element-selector-bugfix infinite 1s;
+    }
+
+    @-webkit-keyframes webkit-adjacent-element-selector-bugfix {
+        from {
+            padding: 0;
+        }
+
+        to {
+            padding: 0;
+        }
+    }
+}
+
+/* TreeView CSS Bitiş */
+
+/* Print Modal*/
+.printModal {
+    font-family: sans-serif;
+    display: flex;
+    text-align: center;
+    font-weight: 300;
+    font-size: 30px;
+    left: 0;
+    top: 0;
+    position: absolute;
+    color: #0460b5;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,.91)
+}
+
+.printClose {
+    position: absolute;
+    right: 10px;
+    top: 10px
+}
+
+    .printClose:before {
+        content: "\00D7";
+        font-family: "Calibri",sans-serif;
+        font-weight: 100;
+        line-height: 1px;
+        padding-top: .5em;
+        display: block;
+        font-size: 2em;
+        text-indent: 1px;
+        overflow: hidden;
+        height: 1.25em;
+        width: 1.25em;
+        text-align: center;
+        cursor: pointer
+    }
+
+.printSpinner {
+    margin-top: 3px;
+    margin-left: -40px;
+    position: absolute;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #0460b5;
+    border-radius: 50%;
+    animation: spin .75s infinite linear
+}
+
+    .printSpinner::after, .printSpinner::before {
+        left: -2px;
+        top: -2px;
+        display: none;
+        position: absolute;
+        content: '';
+        width: inherit;
+        height: inherit;
+        border: inherit;
+        border-radius: inherit
+    }
+
+    .printSpinner, .printSpinner::after, .printSpinner::before {
+        display: inline-block;
+        border-color: transparent;
+        border-top-color: #0460b5;
+        animation-duration: 1.2s
+    }
+
+        .printSpinner::before {
+            transform: rotate(120deg)
+        }
+
+        .printSpinner::after {
+            transform: rotate(240deg)
+        }
+
+@keyframes spin {
+    from {
+        transform: rotate(0)
+    }
+
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+/* Kullanıcı Girişi Sayfası */
+.loginlogo {
+    width: 70px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.menulogo {
+    float: left
+}
+
+.menuuser {
+    float: right;
+    margin-top: 8px;
+}
+
+#document-operations a {
+    margin-bottom: 10px
+}
+
+.whitetxt {
+    color: #fff
+}
+
+table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+    vertical-align: middle
+}
+
+.mainblockarea {
+    width: 100%;
+    margin: 50px auto 0;
+}
+
+.mainblock {
+    position: relative;
+    /*background-color: #03A9F4;*/
+    color: #fff;
+    width: calc(25% - 10px);
+    height: 150px;
+    display: table;
+    float: left;
+    margin: 0 5px 5px;
+    /*box-shadow: 0 2px 2px rgba(51, 51, 51, 0.2);*/
+    transition: all 0.5s
+}
+
+    .mainblock:hover {
+        color: #fff;
+        /*background-color: #2196F3 !important;*/
+    }
+
+.mb-number {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 90px;
+    text-align: right;
+    width: 90px;
+    padding-right: 10px;
+}
+
+.mb-text {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 20px;
+    padding: 5px 20% 0 0;
+    line-height: 1.2;
+}
+
+.mainblock:before {
+    font-family: FontAwesome;
+    color: #fff;
+    position: absolute;
+    right: 10px;
+    bottom: -10px;
+    font-size: 90px;
+    opacity: 0.3;
+}
+
+.mb-control:before {
+    content: "\f14a"
+}
+
+.mb-confirm:before {
+    content: "\f058"
+}
+
+.mb-action:before {
+    content: "\f0ad"
+}
+
+.mb-opinion:before {
+    content: "\f0e5"
+}
+
+.mb-quality-confirm:before {
+    content: "\f087"
+}
+
+.mb-document-list:before {
+    content: "\f03a"
+}
+
+.mb-activity:before {
+    content: "\f0e7"
+}
+
+.mb-activity-create:before {
+    content: "\f0fe"
+}
+
+.mb-qualty:before {
+    /*content: url('/Core/img/icon.png');*/
+    height: 128px;
+    width: 90px;
+    transform: scale(0.85);
+}
+
+.mb-folders:before {
+    content: "\f07c"
+}
+
+.mb-document-types:before {
+    content: "\f15b"
+}
+
+.mb-revision:before {
+    content: "\f0f6"
+}
+
+.mb-templates:before {
+    content: "\f0c5"
+}
+
+.mb-deployment-groups:before {
+    content: "\f1d8"
+}
+
+.mb-sign-out:before {
+    content: "\f08b"
+}
+
+.mb-documents:before {
+    content: "\f15c"
+}
+
+.mb-evaluate:before {
+    content: "\f006"
+}
+
+.mb-view:before {
+    content: "\f06e"
+}
+
+.mb-new-document:before {
+    content: "\f016"
+}
+
+.mb-drafts:before {
+    content: "\f022"
+}
+
+.mb-document-declines:before {
+    content: "\f165"
+}
+
+.mb-declineds:before {
+    content: "\f057"
+}
+
+.mb-cancel-requests:before {
+    content: "\f2d4"
+}
+
+.mb-document-reports:before {
+    content: "\f1c3"
+}
+
+.mb-document-zip:before {
+    content: "\f1c6"
+}
+
+.mb-waitings:before {
+    content: "\f017"
+}
+
+.mb-decision:before {
+    content: "\f27a"
+}
+
+.mb-customer-complaint:before {
+    content: "\f235"
+}
+
+.mb-customer-complaint-confirm:before {
+    content: "\f046"
+}
+.mb-customer-reconcile:before {
+    content: "\f2b5"
+}
+.mb-customer-complete:before {
+    content: "\f11e"
+}
+.mb-error-codes:before {
+    content: "\f198"
+}
+
+.headersearch {
+    width: 240px;
+    display: inline-block
+}
+
+/*.input-group .form-control.hs-input1 {
+    width: 210px
+}
+
+.input-group .form-control.hs-input2 {
+    width: 120px
+}*/
+
+/*.headersearch .btn-default {
+    border-radius: 0;
+    border-style: solid none;
+}*/
+
+
+.customhbutton {
+    background-color: transparent;
+    color: #fff;
+    font-size: 15px;
+    border: none;
+    margin: 4px 0;
+    padding: 5px 0;
+}
+
+    .customhbutton:hover, .customhbutton:active, .customhbutton:focus, .customhbutton:active:focus, .open > .customhbutton.btn-default {
+        background-color: transparent;
+        color: #fff;
+        outline: none
+    }
+
+        .open > .customhbutton.btn-default:hover, .open > .customhbutton.btn-default:focus {
+            background-color: transparent;
+            color: #fff;
+        }
+
+#header-navbar .dropdown-menu-right {
+    right: 30px;
+    top: 64px;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+}
+
+.btn-sm {
+    padding: 5px 10px
+}
+
+.whitebtn, .whitebtn:active, .whitebtn:focus, .whitebtn:hover {
+    background-color: rgba(115, 196, 255, 0.5);
+    color: #fff;
+}
+
+.input-info {
+    height: 36px;
+    box-shadow: 0px 3px 0px 0px #477696;
+}
+
+/*.table {
+    color: #fff
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    color: #fff
+}
+
+div.dataTables_wrapper div.dataTables_length label {
+    color: #fff
+}
+
+div.dataTables_wrapper div.dataTables_filter label {
+    color: #fff
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    color: #fff
+}
+
+div.dataTables_wrapper div.dataTables_info {
+    color: #fff
+}
+
+.pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.5);
+    -webkit-box-shadow: none;
+    box-shadow: none
+}*/
+
+/*.modal-open .modal {
+    background-color: rgba(7, 41, 67, 0.5);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #072943;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}*/
+
+/*.pagination > li > a, .pagination > li > span {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #fff
+}*/
+
+.loginbck {
+    background-color: #fff;
+    color: #333;
+    border-radius: 5px;
+    padding: 30px
+}
+
+@media(max-width:1199px) {
+    .mainblock {
+        width: calc(50% - 10px);
+    }
+}
+
+
+@media(max-width:767px) {
+    .block > .nav-tabs > li {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media(max-width:500px) {
+    .header-navbar-fixed #main-container {
+        padding-top: 110px;
+    }
+
+    .headersearch {
+        display: block;
+        margin-top: 50px;
+        width: 100%;
+    }
+
+    .mainblock {
+        width: calc(100% - 10px);
+    }
+}

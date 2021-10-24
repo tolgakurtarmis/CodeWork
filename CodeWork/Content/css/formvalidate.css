@@ -1,0 +1,74 @@
+﻿.formcontrolitem {
+    position: relative;
+}
+
+    .formcontrolitem input, .formcontrolitem select, .formcontrolitem textarea {
+        padding-left: 25px
+    }
+
+    .formcontrolitem:before {
+        content: "*";
+        position: absolute;
+        top: 5px;
+        left: 8px;
+        font-size: 18px;
+        color: #ccc;
+    }
+
+    .formcontrolitem.errorinput input, .formcontrolitem.errorinput textarea, .formcontrolitem.errorinput select {
+        border-color: #e74c3c;
+    }
+
+    .formcontrolitem.errorinput:before {
+        content: "\2717";
+        position: absolute;
+        top: 5px;
+        left: 8px;
+        font-size: 18px;
+        color: #f44336;
+    }
+
+    .formcontrolitem.validinput:before {
+        content: "\2713";
+        position: absolute;
+        top: 5px;
+        left: 8px;
+        font-size: 18px;
+        color: #4CAF50;
+    }
+
+    .formcontrolitem.errorinput[title]:hover:after {
+        content: attr(title);
+        padding: 8px;
+        color: #fff;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: calc(100% + 3px);
+        z-index: 1000;
+        font-size: 13px;
+        background-color: #555;
+        border-radius: 5px;
+    }
+
+.formcontrolitemc.errorinput:before, .radio.radio-inline.errorinput:before {
+    content: "\2717";
+    color: #e74c3c;
+    position: absolute;
+    left: -15px;
+    top: 7px;
+    font-size: 14px;
+}
+
+.formcontrolitemc.errorinput[title]:hover:after, .radio.radio-inline.errorinput[title]:hover:after {
+    content: attr(title);
+    padding: 8px;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 3px);
+    z-index: 1000;
+    font-size: 13px;
+    background-color: #555;
+    border: 1px solid #333;
+}

@@ -1,0 +1,91 @@
+﻿@using CodeWork.Entities.Dtos
+@model List<BookTransactionDto>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content bg-gray-lighter">
+    <div class="row items-push">
+        <div class="col-sm-7">
+            <h1 class="page-heading">
+            </h1>
+        </div>
+        <div class="col-sm-5 text-right hidden-xs">
+            <ol class="breadcrumb push-10-t">
+                <li>Book Transactions</li>
+                <li><a class="link-effect" href="">Ana Sayfa</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    @if (TempData.ContainsKey("BookTransactionAddSuccess"))
+    {
+        <div class="alert alert-success fade in alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+            <strong>@MvcHtmlString.Create(TempData["BookTransactionAddSuccess"].ToString())</strong>
+        </div>
+        TempData.Remove("BookTransactionAddSuccess");
+    }
+</div>
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="block">
+                <div class="block block-themed block-rounded">
+                    <div class="block-header bg-info">
+                        <ul class="block-options">
+                            <li>
+                                <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="fa fa-arrows-alt"></i></button>
+                            </li>
+                        </ul>
+
+                        <h3 class="block-title">Üyeler</h3>
+                    </div>
+                    <div class="block-content clearfix">
+                        <div class=" table-responsive">
+                            <table class="table table-bordered table-striped js-dataTable-full dataTable no-footer" id="list-table">
+                                <thead>
+                                    <tr>
+                                        <th>Üye TC</th>
+                                        <th>Adı Soyadı</th>
+                                        <th>Kitap Ado</th>
+                                        <th>Barkod</th>
+                                        <th>Verilme Tarihi</th>
+                                        <th>İade Tarihi</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                    @foreach (var bookTransaction in Model)
+                                    {
+                                    <tr>
+                                        <td>@bookTransaction.Member.TCNo</td>
+                                        <td>@bookTransaction.Member.NameSurname</td>
+                                        <td>@bookTransaction.Book.Title</td>
+                                        <td>@bookTransaction.Book.Barcode</td>
+                                        <td>@bookTransaction.AddedDateTimeFormatted</td>
+                                        <td>@bookTransaction.ReturnDateFormatted</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="@Url.Action("Update","BookTransaction",new { bookTransactionId = bookTransaction.Id })">Güncelle</a>
+
+                                        </td>
+                                    </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
